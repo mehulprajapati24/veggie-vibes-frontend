@@ -9,6 +9,9 @@ import {
 import Home from './pages/home/Home.jsx'
 import ErrorPage from './pages/error/ErrorPage.jsx';
 import CategoryPage from './pages/category/CategoryPage.jsx';
+import SearchSection from './pages/SearchSection.jsx';
+
+
 
 const router = createBrowserRouter([
   {
@@ -23,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/categories/:category",
         element: <CategoryPage/>
+      },
+      {
+        path: "/search",
+        element: <SearchSection/>
       }
     ]
   },
