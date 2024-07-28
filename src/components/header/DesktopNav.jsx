@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 const DesktopNav = ({menuItems}) => {
   return (
     <div className='h-16 flex justify-between items-center px-6 lg:px-12'>
-        <a href="/" className='font-bold text-2xl'>
+        <Link to="/" className='font-bold text-2xl'>
             Veggie-Vibes
-        </a>
+        </Link>
 
         <ul className='flex gap-7'>
             {

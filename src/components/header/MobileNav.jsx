@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom'
 const MobileNav = ({menuItems, onClose, onOpen, hideLeft}) => {
   return (
     <div className='h-16 flex justify-between items-center px-6 lg:px-12'>
-        <a href="/" className='font-bold text-xl'>
+        <Link to="/" className='font-bold text-xl'>
             Veggie-Vibes
-        </a>
+        </Link>
 
         <button onClick={onOpen}>
             <HiMiniBars3BottomRight className='w-7 h-7'/>
@@ -41,7 +41,7 @@ const MobileNav = ({menuItems, onClose, onOpen, hideLeft}) => {
                     </li>
                 </ul>
 
-                
+
             </div>
         </div>
     </div>

@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Home from './pages/home/Home.jsx'
 import ErrorPage from './pages/error/ErrorPage.jsx';
+import CategoryPage from './pages/category/CategoryPage.jsx';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home/>
+      },
+      {
+        path: "/categories/:category",
+        element: <CategoryPage/>
       }
     ]
   },
