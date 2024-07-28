@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 const DesktopNav = ({menuItems}) => {
   return (
-    <div className='h-16 flex justify-between items-center px-6 lg:px-12'>
-        <Link to="/" className='font-bold text-2xl'>
+    <div className='h-16 flex justify-between items-center px-6 lg:px-12 bg-white'>
+        <Link to="/" className='font-bold text-2xl text-btnColor'>
             Veggie-Vibes
         </Link>
 

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { IoSearchOutline } from "react-icons/io5";
 import { useParams } from 'react-router-dom';
+import Card from '../components/Card';
 import axios from 'axios';
 
 const SearchSection = () => {
@@ -48,10 +49,13 @@ const SearchSection = () => {
             <input className='outline-none w-full placeholder:text-[#6b8086]' type="search" name="query" onChange={(e)=>setQuery(e.target.value)} placeholder='Search for a recipe' id='search' required />
         </div>
 
-        <ul>
+        {loading && <div>Loading...</div>}
+        {error && <div>Unknown Error Happens...</div>}
+
+        <ul className='mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
             {
                 results && results.map((item)=>(
-                    <li key={item._id}>{item.name}</li>
+                    <Card item={item} key={item._id}/>
                 ))
             }
         </ul>

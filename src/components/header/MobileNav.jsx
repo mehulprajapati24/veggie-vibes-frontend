@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const MobileNav = ({menuItems, onClose, onOpen, hideLeft}) => {
   return (
     <div className='h-16 flex justify-between items-center px-6 lg:px-12'>
-        <Link to="/" className='font-bold text-xl'>
+        <Link to="/" className='font-bold text-xl text-btnColor'>
             Veggie-Vibes
         </Link>
 
