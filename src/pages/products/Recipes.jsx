@@ -10,7 +10,7 @@ const Recipes = () => {
 
     useEffect(()=>{
         const getAllItems = async () =>{
-            const response = await axios.get("http://localhost:5000/api/all-items");
+            const response = await axios.get("https://veggie-vibes-backend.vercel.app/api/all-items");
             setItems(response.data);
         }
         getAllItems();
