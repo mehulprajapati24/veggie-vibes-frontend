@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const DesktopNav = ({menuItems}) => {
   return (
-    <div className='h-16 flex justify-between items-center px-6 lg:px-12 bg-white'>
+    <div className='h-16 flex justify-between items-center px-6 lg:px-12'>
         <Link to="/" className='font-bold text-2xl text-btnColor'>
             Veggie-Vibes
         </Link>
@@ -12,7 +12,7 @@ const DesktopNav = ({menuItems}) => {
             {
                 menuItems?.map((menu, index)=>(
                     <li key={index}>
-                        <Link to={menu} className='font-medium capitalize' text-secondary>{menu}</Link>
+                        <Link to={menu === "home" ? "/" : menu} className='font-medium capitalize' text-secondary>{menu}</Link>
                     </li>
                 ))
             }

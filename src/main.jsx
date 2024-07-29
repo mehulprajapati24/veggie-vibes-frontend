@@ -10,7 +10,10 @@ import Home from './pages/home/Home.jsx'
 import ErrorPage from './pages/error/ErrorPage.jsx';
 import CategoryPage from './pages/category/CategoryPage.jsx';
 import SearchSection from './pages/SearchSection.jsx';
-
+import SingleProduct from './pages/products/SingleProduct.jsx';
+import Recipes from './pages/products/Recipes.jsx';
+import About from './pages/about/About.jsx';
+import Contact from './pages/contact/Contact.jsx';
 
 
 const router = createBrowserRouter([
@@ -30,6 +33,23 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <SearchSection/>
+      },
+      {
+        path: "/items/:id",
+        element: <SingleProduct/>,
+        loader: ({params}) => fetch(`http://localhost:5000/api/items/${params.id}`)
+      },
+      {
+        path: "/recipes",
+        element: <Recipes/>
+      },
+      {
+        path: "/about",
+        element: <About/>
+      },
+      {
+        path: "/contact",
+        element: <Contact/>
       }
     ]
   },
