@@ -6,7 +6,6 @@ import axios from 'axios';
 
 const SearchSection = () => {
 
-    const searchText = useParams();
     const [query, setQuery] = useState("");
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -46,7 +45,7 @@ const SearchSection = () => {
 
         <div className='bg-white md:max-w-3xl m-auto p-4 rounded relative flex items-center'>
             <IoSearchOutline className='w-5 h-5 mr-2 text-neutral-300'/>
-            <input className='outline-none w-full placeholder:text-[#6b8086]' type="search" name="query" onChange={(e)=>setQuery(e.target.value)} placeholder='Search for a recipe' id='search' required />
+            <input className='outline-none w-full placeholder:text-[#6b8086]' type="search" name="query"  value={query} placeholder='Search for a recipe' id='search' required />
         </div>
 
         {loading && <div>Loading...</div>}
