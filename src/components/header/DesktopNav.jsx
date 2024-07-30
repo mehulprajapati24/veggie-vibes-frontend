@@ -22,10 +22,10 @@ const DesktopNav = ({menuItems}) => {
 
         <ul className='flex items-center gap-4 font-medium'>
             <li>
-                <button className='text-secondary px-4 py-2 rounded border border-black bg-slate-100 hover:bg-black hover:text-white active:bg-slate-700'>Log In</button>
+                <Link to="/login" className='text-secondary px-4 py-2 rounded border border-black bg-slate-100 hover:bg-black hover:text-white active:bg-slate-700'>Log In</Link>
             </li>
             <li>
-                <button className='text-secondary px-4 py-2 rounded border border-black bg-slate-100 hover:bg-black hover:text-white active:bg-slate-700'>Sign Up</button>
+                <Link to="/signup" className='text-secondary px-4 py-2 rounded border border-black bg-slate-100 hover:bg-black hover:text-white active:bg-slate-700'>Sign Up</Link>
             </li>
         </ul>
     </div>

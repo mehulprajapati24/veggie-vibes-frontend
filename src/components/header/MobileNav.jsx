@@ -24,7 +24,7 @@ const MobileNav = ({menuItems, onClose, onOpen, hideLeft}) => {
                     {
                         menuItems?.map((menu, index) => (
                             <li key={index}>
-                                <Link to={menu} className='font-medium capitalize text-secondary text-xl'>{menu}</Link>
+                                <Link onClick={onClose} to={menu === "home" ? "/" : menu} className='font-medium capitalize text-secondary text-xl'>{menu}</Link>
                             </li>
                             ))
                     }

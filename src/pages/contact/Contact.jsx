@@ -7,7 +7,7 @@ const Contact = () => {
             <div>
                 <p className="font-medium text-blue-500">Contact us</p>
 
-                <h1 className="mt-2 text-2xl font-semibold text-gray-800 md:text-3xl dark:text-white">Chat to our friendly team</h1>
+                <h1 className="mt-2 text-2xl font-semibold  md:text-3xl text-gray-800">Chat to our friendly team</h1>
 
                 <p className="mt-3 text-gray-500 dark:text-gray-400">We’d love to hear from you. Please fill out this form or shoot us an email.</p>
             </div>

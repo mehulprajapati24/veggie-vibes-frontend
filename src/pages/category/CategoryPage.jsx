@@ -14,7 +14,7 @@ const CategoryPage = () => {
       const fetchCategoryData = async (req, res)=>{
         setLoading(true);
         try {
-          const response = await axios.get(`https://veggie-vibes-backend.vercel.app/api/categories/${category}`);
+          const response = await axios.get(`http://localhost:5000/api/categories/${category}`);
           setItems(response.data);
         } catch (error) {
           setError(error.message || "Error loading category")

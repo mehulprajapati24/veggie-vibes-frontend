@@ -19,7 +19,7 @@ const SingleProduct = () => {
   return (
     <section className='min-h-dvh md:flex justify-center items-center md:bg-eggshell'>
         <article>
-            <div className='bg-white md:my-[5rem] md:py-8 pb-8 md:rounded-xl'>
+            <div className='bg-white md:my-[1rem] md:py-8 pb-8 md:rounded-xl'>
                 <picture>
                     <img src={item.thumbnail_image} alt="thumbnail_image" className='md:max-w-[90%] w-full md:h-[570px] md:rounded-xl mx-auto'/>
                 </picture>
