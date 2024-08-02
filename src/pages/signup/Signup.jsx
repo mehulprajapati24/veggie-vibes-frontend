@@ -33,7 +33,7 @@ const Signup = () => {
 
     try{
 
-    const response = await axios.post("http://localhost:5000/user/signup", {
+    const response = await axios.post("https://veggie-vibes-backend.vercel.app/user/signup", {
       username,
       email,
       password

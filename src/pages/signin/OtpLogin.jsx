@@ -20,7 +20,7 @@ const OtpLogin = () => {
 
  
   const resendOtp = async () => {
-    const response = await axios.post("http://localhost:5000/user/forgot-password", { email });
+    const response = await axios.post("https://veggie-vibes-backend.vercel.app/user/forgot-password", { email });
     setError('');
   }
 
@@ -28,7 +28,7 @@ const OtpLogin = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/user/forgot-password/otp', { email, otp });
+      const response = await axios.post('https://veggie-vibes-backend.vercel.app/user/forgot-password/otp', { email, otp });
       
       if (response.data.error) {
         setError(response.data.message);

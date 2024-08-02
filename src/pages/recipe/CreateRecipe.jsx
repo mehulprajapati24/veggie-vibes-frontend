@@ -27,7 +27,7 @@ const CreateRecipe = () => {
       try {
         const token = localStorage.getItem('accessToken');
         if (token) {
-          const response = await axios.get("http://localhost:5000/user/dashboard", {
+          const response = await axios.get("https://veggie-vibes-backend.vercel.app/user/dashboard", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -79,7 +79,7 @@ const CreateRecipe = () => {
 
     const token = localStorage.getItem('accessToken');
     
-    const response = await axios.post("http://localhost:5000/user/create-recipe", {
+    const response = await axios.post("https://veggie-vibes-backend.vercel.app/user/create-recipe", {
       recipeName: formData.recipeName,
       image: formData.image,
       category: formData.category,

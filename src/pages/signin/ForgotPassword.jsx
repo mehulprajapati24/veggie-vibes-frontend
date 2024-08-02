@@ -23,7 +23,7 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/user/forgot-password", { email });
+      const response = await axios.post("https://veggie-vibes-backend.vercel.app/user/forgot-password", { email });
 
       if (response.data.error) {
         // Handle error response

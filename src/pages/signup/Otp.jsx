@@ -20,7 +20,7 @@ const Otp = () => {
 
  
   const resendOtp = async () => {
-    const response = await axios.post("http://localhost:5000/user/signup", {
+    const response = await axios.post("https://veggie-vibes-backend.vercel.app/user/signup", {
       username,
       email,
       password
@@ -32,7 +32,7 @@ const Otp = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/user/verify-otp', { email, otp, password, username });
+      const response = await axios.post('https://veggie-vibes-backend.vercel.app/user/verify-otp', { email, otp, password, username });
       
       if (response.data.error) {
         setError(response.data.message);

@@ -15,7 +15,7 @@ const DesktopNav = ({ menuItems }) => {
             try {
                 const token = localStorage.getItem('accessToken');
                 if (token) {
-                    const response = await axios.get("http://localhost:5000/user/dashboard", {
+                    const response = await axios.get("https://veggie-vibes-backend.vercel.app/user/dashboard", {
                         headers: {
                             Authorization: `Bearer ${token}`,
                         },

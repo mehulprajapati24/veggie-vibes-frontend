@@ -8,7 +8,7 @@ const LatestRecipe = () => {
     const [items, setItems] = useState([]);
     useEffect(()=>{
         const getLatestItems = async () =>{
-            const response = await axios.get("http://localhost:5000/api/latest-items");
+            const response = await axios.get("https://veggie-vibes-backend.vercel.app/api/latest-items");
             setItems(response.data);
         }
         getLatestItems();

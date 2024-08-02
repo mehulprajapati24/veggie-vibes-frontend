@@ -22,7 +22,7 @@ const SingleProduct = () => {
         try {
             const token = localStorage.getItem('accessToken');
 
-            const response = await axios.post('http://localhost:5000/api/comment', { comment, itemId: item._id },{
+            const response = await axios.post('https://veggie-vibes-backend.vercel.app/api/comment', { comment, itemId: item._id },{
                 headers: {
                     Authorization: `Bearer ${token}`,
                   },

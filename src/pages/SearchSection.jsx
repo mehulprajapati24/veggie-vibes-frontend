@@ -24,7 +24,7 @@ const SearchSection = () => {
         const fetchItems = async () =>{
             setLoading(true);
             try{
-                const response = await axios.get(`http://localhost:5000/api/items`, {
+                const response = await axios.get(`https://veggie-vibes-backend.vercel.app/api/items`, {
                     params: {
                         q: query
                         }

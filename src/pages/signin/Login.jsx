@@ -25,7 +25,7 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/user/login", {
+      const response = await axios.post("https://veggie-vibes-backend.vercel.app/user/login", {
         username,
         password
       });

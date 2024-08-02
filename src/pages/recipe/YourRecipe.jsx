@@ -16,7 +16,7 @@ const YourRecipe = () => {
             try {
                 const token = localStorage.getItem('accessToken');
                 if (token) {
-                    const response = await axios.get("http://localhost:5000/api/your-items", {
+                    const response = await axios.get("https://veggie-vibes-backend.vercel.app/api/your-items", {
                         headers: {
                             Authorization: `Bearer ${token}`,
                         },
