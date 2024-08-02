@@ -28,15 +28,15 @@ const DesktopNav = ({ menuItems }) => {
                         console.log("no token");
                     } else {
                         setUser(response.data.user);
-                        if(welcomeMessage){
-                            toast.success(`${welcomeMessage} ${response.data.user.username}!`, {
-                                autoClose: 1000
-                            });
-                        }else{
-                        toast.success(`Welcome back, ${response.data.user.username}!`, {
-                            autoClose: 1000
-                        });
-                    }
+                    //     if(welcomeMessage){
+                    //         toast.success(`${welcomeMessage} ${response.data.user.username}!`, {
+                    //             autoClose: 1000
+                    //         });
+                    //     }else{
+                    //     toast.success(`Welcome back, ${response.data.user.username}!`, {
+                    //         autoClose: 1000
+                    //     });
+                    // }
                     }
                 } else {
                     console.log("no token");

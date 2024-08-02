@@ -40,8 +40,8 @@ const CreateRecipe = () => {
             navigate("/login");
           } else {
             setUser(response.data.user);
-            setKey(response.data.upload_care_key);
-            setCloudName(response.data.cloud_name);
+            setKey("b78767dac796fc43c744");
+            setCloudName("djbbpvqxu");
           }
         } else {
           navigate("/login");
