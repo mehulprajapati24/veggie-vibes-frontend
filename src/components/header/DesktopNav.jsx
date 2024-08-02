@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -7,6 +7,8 @@ import { FaUserCircle } from 'react-icons/fa';
 
 const DesktopNav = ({ menuItems }) => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { welcomeMessage } = location.state || {}
     const [user, setUser] = useState(null);
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -26,9 +28,15 @@ const DesktopNav = ({ menuItems }) => {
                         console.log("no token");
                     } else {
                         setUser(response.data.user);
+                        if(welcomeMessage){
+                            toast.success(`${welcomeMessage} ${response.data.user.username}!`, {
+                                autoClose: 1000
+                            });
+                        }else{
                         toast.success(`Welcome back, ${response.data.user.username}!`, {
                             autoClose: 1000
                         });
+                    }
                     }
                 } else {
                     console.log("no token");
@@ -81,7 +89,7 @@ const DesktopNav = ({ menuItems }) => {
                             </div>
                         </button>
                         {dropdownOpen && (
-                            <div className='absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg'>
+                            <div className='absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-10'>
                                 <div className='block px-4 py-2 text-gray-800 font-bold'>{user.username}</div>
                                 <Link to="/create-recipe" onClick={toggleDropdown} className='block px-4 py-2 text-gray-800 hover:bg-gray-200'>Create Recipe</Link>
                                 <Link to="/your-recipe" onClick={toggleDropdown} className='block px-4 py-2 text-gray-800 hover:bg-gray-200'>Your Recipe</Link>

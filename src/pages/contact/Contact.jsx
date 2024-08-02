@@ -1,6 +1,22 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 
 const Contact = () => {
+
+    const [access_key, setAccessKey] = useState("");
+
+    useEffect(() => {
+        const fetchAccessKey = async () => {
+            try {
+                const response = await axios.get("https://veggie-vibes-backend.vercel.app/user/getkey");
+                setAccessKey(response.data.key);
+            } catch (error) {
+                console.error('Error fetching access key:', error);
+            }
+        };
+        fetchAccessKey();
+    }, []);
+
   return (
         <section className="bg-white container mx-auto rounded-lg">
         <div className="container px-6 py-12 mx-auto">
@@ -23,7 +39,7 @@ const Contact = () => {
 
                         <h2 className="mt-4 text-base font-medium text-gray-800">Email</h2>
                         <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">Our friendly team is here to help.</p>
-                        <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">hello@merakiui.com</p>
+                        <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">veggierecipevibes@1234.com</p>
                     </div>
 
                     <div>
@@ -66,30 +82,26 @@ const Contact = () => {
                 </div>
 
                 <div className="p-4 py-6 rounded-lg bg-gray-50  md:p-8">
-                    <form>
+                    <form action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value={access_key}/>
                         <div className="-mx-2 md:items-center md:flex">
                             <div className="flex-1 px-2">
-                                <label className="block mb-2 text-sm text-gray-600">First Name</label>
-                                <input type="text" placeholder="John " className="block w-full px-5 py-2.5 mt-2  border  rounded-lg placeholder-gray-400 bg-white text-gray-700 border-gray-200  focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                            </div>
-
-                            <div className="flex-1 px-2 mt-4 md:mt-0">
-                                <label className="block mb-2 text-sm text-gray-600">Last Name</label>
-                                <input type="text" placeholder="Doe" className="block w-full px-5 py-2.5 mt-2   border  rounded-lg placeholder-gray-400 bg-white text-gray-700 border-gray-200 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                <label className="block mb-2 text-sm text-gray-600">Full Name</label>
+                                <input type="text" name="name" placeholder="Mehul Prajapati" className="block w-full px-5 py-2.5 mt-2  border  rounded-lg placeholder-gray-400 bg-white text-gray-700 border-gray-200  focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                             </div>
                         </div>
 
                         <div className="mt-4">
                             <label className="block mb-2 text-sm text-gray-600">Email address</label>
-                            <input type="email" placeholder="johndoe@example.com" className="block w-full px-5 py-2.5 mt-2    border  rounded-lg placeholder-gray-400 bg-white text-gray-700 border-gray-200 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <input type="email" name="email" placeholder="mehul123@gmail.com" className="block w-full px-5 py-2.5 mt-2    border  rounded-lg placeholder-gray-400 bg-white text-gray-700 border-gray-200 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                         </div>
 
                         <div className="w-full mt-4">
                             <label className="block mb-2 text-sm text-gray-600">Message</label>
-                            <textarea className="block w-full h-32 px-5 py-2.5 mt-2    border  rounded-lg md:h-56 placeholder-gray-400 bg-white text-gray-700 border-gray-200 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Message"></textarea>
+                            <textarea name="message" className="block w-full h-32 px-5 py-2.5 mt-2    border  rounded-lg md:h-56 placeholder-gray-400 bg-white text-gray-700 border-gray-200 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Message"></textarea>
                         </div>
 
-                        <button className="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                        <button type="submit" className="w-full px-6 py-3 mt-4 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                             Send message
                         </button>
                     </form>

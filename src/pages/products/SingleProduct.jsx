@@ -48,7 +48,12 @@ const SingleProduct = () => {
             <article>
                 <div className='bg-white md:my-[1rem] md:py-8 pb-8 md:rounded-xl'>
                     <picture>
-                        <img src={item.image} alt="thumbnail_image" className='md:max-w-[90%] w-full md:h-[570px] md:rounded-xl mx-auto' />
+                        <video
+                                controls
+                                src={item.video}
+                                alt="video"
+                                className='md:max-w-[90%] w-full md:h-[570px] md:rounded-xl mx-auto'
+                            />
                     </picture>
 
                     <div className='px-8'>

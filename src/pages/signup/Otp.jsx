@@ -43,7 +43,8 @@ const Otp = () => {
         localStorage.setItem('accessToken', response.data.accessToken);
         setOtp('');
         setTimeout(() => {
-          navigate('/');
+          navigate('/',  { state: { 
+            welcomeMessage: "Welcome," } });
         }, 1400);
       }
     } catch (error) {

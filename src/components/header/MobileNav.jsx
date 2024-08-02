@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { HiMiniBars3BottomRight } from "react-icons/hi2";
 import { RiCloseCircleLine } from "react-icons/ri";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 const MobileNav = ({menuItems, onClose, onOpen, hideLeft}) => {
   const [user, setUser] = useState(null);
+  const location = useLocation();
+  const { welcomeMessage } = location.state || {}
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,6 +26,15 @@ const MobileNav = ({menuItems, onClose, onOpen, hideLeft}) => {
             console.log("Session expired. Please log in again.");
           } else {
             setUser(response.data.user);
+            if(welcomeMessage){
+              toast.success(`${welcomeMessage} ${response.data.user.username}!`, {
+                  autoClose: 1000
+              });
+              }else{
+              toast.success(`Welcome back, ${response.data.user.username}!`, {
+                  autoClose: 1000
+              });
+          }
           }
         } else {
           console.log("No token found");
@@ -43,8 +56,9 @@ const MobileNav = ({menuItems, onClose, onOpen, hideLeft}) => {
 
   return (
     <div className='h-16 flex justify-between items-center px-6 lg:px-12'>
-      <Link to="/" className='font-bold text-xl text-btnColor'>
-        Veggie-Recipe-Vibes
+      <Link to="/">
+       <h1 className='font-bold text-xl text-btnColor'>Veggie-Recipe-Vibes</h1>
+       <ToastContainer/>
       </Link>
 
       <button onClick={onOpen}>

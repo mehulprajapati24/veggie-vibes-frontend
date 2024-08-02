@@ -10,9 +10,11 @@ const CreateRecipe = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [key, setKey] = useState('');
+  const [cloudName, setCloudName] = useState("");
   const [formData, setFormData] = useState({
     recipeName: '',
     image: '',
+    video: '',
     category: '',
     instructions: '',
     ingredients: '',
@@ -21,6 +23,7 @@ const CreateRecipe = () => {
     difficulty: '',
     aboutDish: ''
   });
+  const [isVideoUploaded, setIsVideoUploaded] = useState(false); // New state for video upload status
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -38,6 +41,7 @@ const CreateRecipe = () => {
           } else {
             setUser(response.data.user);
             setKey(response.data.upload_care_key);
+            setCloudName(response.data.cloud_name);
           }
         } else {
           navigate("/login");
@@ -61,7 +65,6 @@ const CreateRecipe = () => {
   const handleFileChange = (fileList) => {
     if (fileList && fileList.allEntries.length > 0) {
       const fileInfo = fileList.allEntries[0];
-      console.log('File uploaded:', fileInfo);
       setFormData((prevData) => ({
         ...prevData,
         image: fileInfo.cdnUrl || 'noimage',
@@ -69,49 +72,91 @@ const CreateRecipe = () => {
     }
   };
 
+  const handleVideoUpload = async (event) => {
+    const videoFile = event.target.files[0];
+    
+    if (!videoFile) {
+      console.error("No video file selected.");
+      return;
+    }
+  
+    const formData = new FormData();
+    formData.append('file', videoFile);
+    formData.append('upload_preset', 'video_preset'); // Replace with your Cloudinary upload preset
+  
+    try {
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
+        formData
+      );
+      const videoUrl = response.data.secure_url;
+      console.log("Video URL:", videoUrl);
+
+      setFormData((prevData) => ({
+        ...prevData,
+        video: videoUrl,
+      }));
+      setIsVideoUploaded(true); // Set video upload status to true
+    } catch (error) {
+      console.error("Error uploading video:", error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!formData.recipeName || !formData.image || !formData.category || !formData.instructions || !formData.ingredients || !formData.preparationTime || !formData.cookTime || !formData.difficulty || !formData.aboutDish) {
+    if (!isVideoUploaded) {
+      alert('Please wait for the video to upload.');
+      return;
+    }
+
+    if (!formData.recipeName || !formData.image || !formData.video || !formData.category || !formData.instructions || !formData.ingredients || !formData.preparationTime || !formData.cookTime || !formData.difficulty || !formData.aboutDish) {
       alert('Please fill in all required fields.');
       return;
     }
 
     const token = localStorage.getItem('accessToken');
     
-    const response = await axios.post("https://veggie-vibes-backend.vercel.app/user/create-recipe", {
-      recipeName: formData.recipeName,
-      image: formData.image,
-      category: formData.category,
-      instructions: formData.instructions,
-      ingredients: formData.ingredients,
-      preparationTime: formData.preparationTime,
-      cookTime: formData.cookTime,
-      difficulty: formData.difficulty,
-      aboutDish: formData.aboutDish
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
+    try {
+      const response = await axios.post("https://veggie-vibes-backend.vercel.app/user/create-recipe", {
+        recipeName: formData.recipeName,
+        image: formData.image,
+        video: formData.video,
+        category: formData.category,
+        instructions: formData.instructions,
+        ingredients: formData.ingredients,
+        preparationTime: formData.preparationTime,
+        cookTime: formData.cookTime,
+        difficulty: formData.difficulty,
+        aboutDish: formData.aboutDish
       },
-    });
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    toast.success(response.data.message, {
-      autoClose: 1000
-  });
+      toast.success(response.data.message, {
+        autoClose: 1000
+      });
 
-  setFormData({
-    recipeName: '',
-    image: '',
-    category: '',
-    instructions: '',
-    ingredients: '',
-    preparationTime: '',
-    cookTime: '',
-    difficulty: '',
-    aboutDish: ''
-  });
+      setFormData({
+        recipeName: '',
+        image: '',
+        video: '',
+        category: '',
+        instructions: '',
+        ingredients: '',
+        preparationTime: '',
+        cookTime: '',
+        difficulty: '',
+        aboutDish: ''
+      });
 
+      setIsVideoUploaded(false); // Reset video upload status
+    } catch (error) {
+      console.error("Error submitting recipe:", error);
+    }
   };
 
   return (
@@ -134,10 +179,24 @@ const CreateRecipe = () => {
           <FileUploaderRegular
             onChange={handleFileChange}
             pubkey={key}
+            accept='image/*'
             className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
+
+        <div>
+          <label className="block text-gray-700">Upload Video:</label>
+          <input
+            type="file"
+            accept='video/*'
+            name="video"
+            onChange={handleVideoUpload}
+            className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+
         <div>
           <label className="block text-gray-700">Category:</label>
           <select
@@ -214,7 +273,7 @@ const CreateRecipe = () => {
           </select>
         </div>
         <div>
-          <label className="block text-gray-700">About the Dish:</label>
+          <label className="block text-gray-700">About the Dish/Drink:</label>
           <textarea
             name="aboutDish"
             value={formData.aboutDish}
@@ -227,6 +286,7 @@ const CreateRecipe = () => {
           Submit Recipe
         </button>
       </form>
+      <ToastContainer />
     </div>
   );
 };
