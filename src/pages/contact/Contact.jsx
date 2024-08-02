@@ -10,6 +10,7 @@ const Contact = () => {
             try {
                 const response = await axios.get("https://veggie-vibes-backend.vercel.app/user/getkey");
                 setAccessKey(response.data.key);
+                console.log("access key: ", access_key);
             } catch (error) {
                 console.error('Error fetching access key:', error);
             }
@@ -83,7 +84,7 @@ const Contact = () => {
 
                 <div className="p-4 py-6 rounded-lg bg-gray-50  md:p-8">
                     <form action="https://api.web3forms.com/submit" method="POST">
-                    <input type="hidden" name="access_key" value={access_key}/>
+                    <input type="hidden" name="access_key" value="acd77f4e-8265-4f57-a44d-65d54d3c5efd"/>
                         <div className="-mx-2 md:items-center md:flex">
                             <div className="flex-1 px-2">
                                 <label className="block mb-2 text-sm text-gray-600">Full Name</label>
