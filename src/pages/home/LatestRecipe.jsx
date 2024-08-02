@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Card from '../../components/Card';
 import { Link } from 'react-router-dom';
+import CardRecipe from '../../components/CardRecipe';
 
 const LatestRecipe = () => {
     const [items, setItems] = useState([]);
@@ -21,7 +22,7 @@ const LatestRecipe = () => {
             <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
                 {
                     items && items.map((item)=>(
-                        <Card item={item} key={item._id}/>
+                        <CardRecipe item={item} key={item._id}/>
                     ))
                 }
             </ul>

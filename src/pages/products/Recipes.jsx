@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios';
 import Card from '../../components/Card'
 import CategoryWrapper from '../category/CategoryWrapper';
+import CardRecipe from '../../components/CardRecipe';
 
 
 const Recipes = () => {
@@ -28,7 +29,7 @@ const Recipes = () => {
         <ul className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-10'>
                 {
                     items && items.map((item)=>(
-                        <Card item={item} key={item._id}/>
+                        <CardRecipe item={item} key={item._id}/>
                     ))
                 }
         </ul>

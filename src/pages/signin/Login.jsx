@@ -37,8 +37,8 @@ const Login = () => {
         return;
       } else {
         // Handle successful response
-        
-        navigate('/dashboard');
+        localStorage.setItem('accessToken', response.data.accessToken);
+        navigate('/');
       }
     } catch (error) {
       console.error(error);

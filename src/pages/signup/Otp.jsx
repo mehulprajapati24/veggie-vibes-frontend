@@ -40,9 +40,10 @@ const Otp = () => {
         toast.success(response.data.message, {
           autoClose: 1400,
         });
+        localStorage.setItem('accessToken', response.data.accessToken);
         setOtp('');
         setTimeout(() => {
-          navigate('/dashboard');
+          navigate('/');
         }, 1400);
       }
     } catch (error) {

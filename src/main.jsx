@@ -16,11 +16,12 @@ import About from './pages/about/About.jsx';
 import Contact from './pages/contact/Contact.jsx';
 import Signup from './pages/signup/Signup.jsx';
 import Login from './pages/signin/Login.jsx';
-import Dashboard from './pages/dashboard/Dashboard.jsx';
 import Otp from './pages/signup/Otp.jsx';
 import ForgotPassword from './pages/signin/ForgotPassword.jsx';
 import OtpLogin from './pages/signin/OtpLogin.jsx';
 import ChangePassword from './pages/signin/ChangePassword.jsx';
+import CreateRecipe from './pages/recipe/CreateRecipe.jsx';
+import YourRecipe from './pages/recipe/YourRecipe.jsx';
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact/>
+      },
+      {
+        path: "/create-recipe",
+        element: <CreateRecipe/>
+      },
+      {
+        path: "/your-recipe",
+        element: <YourRecipe/>
       }
     ]
   },
@@ -67,10 +76,6 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login/>
-  },
-  {
-    path: "/dashboard",
-    element: <Dashboard/>
   },
   {
     path: "/enter-otp",
