@@ -8,7 +8,7 @@ const Footer = () => {
       <div>
         <div className="text-btnColor">
         <h1 className='font-bold text-2xl'>
-            Veggie-Vibes
+            Veggie-Recipe-Vibes
         </h1>
         </div>
 

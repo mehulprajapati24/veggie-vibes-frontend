@@ -43,6 +43,7 @@ const CardRecipe = ({ item }) => {
   return (
     <div className="container mx-auto flex justify-center md:justify-start">
       <div className="max-w-sm">
+      <Link to={`/items/${item._id}`}>
         <div className="bg-white relative shadow-lg hover:shadow-xl transition duration-500 rounded-lg">
           <div className="relative h-48 overflow-hidden rounded-t-lg">
             <img
@@ -52,11 +53,11 @@ const CardRecipe = ({ item }) => {
             />
           </div>
           <div className="py-3 px-5 bg-white">
-            <Link to={`/items/${item._id}`}>
+            
               <h1 className="text-gray-700 font-bold text-xl mb-8 hover:text-gray-900 hover:cursor-pointer">
                 {item?.recipeName}
               </h1>
-            </Link>
+            
 
             <div className="flex justify-between items-center flex-wrap">
               <button
@@ -68,7 +69,7 @@ const CardRecipe = ({ item }) => {
 
               <div className="flex items-center py-2">
                 <GoClock />
-                <span className="ml-1">{item?.preparationTime}</span>
+                <span className="ml-1">{item?.cookTime}</span>
               </div>
             </div>
           </div>
@@ -77,6 +78,7 @@ const CardRecipe = ({ item }) => {
             <span className="font-medium">{item?.difficulty}</span>
           </div>
         </div>
+        </Link>
       </div>
     </div>
   );

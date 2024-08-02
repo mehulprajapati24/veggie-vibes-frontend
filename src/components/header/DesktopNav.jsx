@@ -56,7 +56,7 @@ const DesktopNav = ({ menuItems }) => {
     return (
         <div className='h-16 flex justify-between items-center px-6 lg:px-12'>
             <Link to="/" >
-                <h1 className='font-bold text-2xl text-btnColor'>Veggie-Vibes</h1>
+                <h1 className='font-bold text-2xl text-btnColor'>Veggie-Recipe-Vibes</h1>
                 <ToastContainer/>
             </Link>
             

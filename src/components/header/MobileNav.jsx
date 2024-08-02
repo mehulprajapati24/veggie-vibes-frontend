@@ -44,7 +44,7 @@ const MobileNav = ({menuItems, onClose, onOpen, hideLeft}) => {
   return (
     <div className='h-16 flex justify-between items-center px-6 lg:px-12'>
       <Link to="/" className='font-bold text-xl text-btnColor'>
-        Veggie-Vibes
+        Veggie-Recipe-Vibes
       </Link>
 
       <button onClick={onOpen}>

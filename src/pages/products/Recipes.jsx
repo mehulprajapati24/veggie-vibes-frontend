@@ -9,7 +9,9 @@ const Recipes = () => {
 
     const [items, setItems] = useState([]);
 
+
     useEffect(()=>{
+        window.scrollTo(0,0);
         const getAllItems = async () =>{
             const response = await axios.get("http://localhost:5000/api/all-items");
             setItems(response.data);

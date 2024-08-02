@@ -1,5 +1,6 @@
 import React from 'react';
 import FeaturedImg from '../../assets/featured.webp'
+import { Link } from 'react-router-dom';
 
 const FeaturedSection = () => {
   return (
@@ -14,7 +15,9 @@ const FeaturedSection = () => {
             <p className='mt-4 text-[#5c5c5c] text-justify'>The Pineapple + Smoked Jackfruit Pizza is a unique and flavorful combination that blends the sweetness of pineapple with the smoky, meaty texture of jackfruit. </p>
             <div className='lg:mt-0 lg:flex-shrink-0'>
                 <div className='mt-12 inline-flex'>
+                    <Link to="/items/66abc6d70313636fbcc09fa6">
                     <button className='py-4 px-8 bg-btnColor text-white hover:text-secondary hover:bg-white w-full transition ease-in duration-200 text-center text-base font-semibold border border-[#9c702a] rounded-lg'>View Recipe</button>
+                    </Link>
                 </div>
             </div>
         </div>
