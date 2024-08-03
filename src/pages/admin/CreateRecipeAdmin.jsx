@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { FileUploaderRegular } from '@uploadcare/react-uploader';
@@ -9,8 +9,8 @@ import 'react-toastify/dist/ReactToastify.css';
 const CreateRecipe = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [key, setKey] = useState('');
-  const [cloudName, setCloudName] = useState("");
+  const [key, setKey] = useState('b78767dac796fc43c744');
+  const [cloudName, setCloudName] = useState("djbbpvqxu");
   const [formData, setFormData] = useState({
     recipeName: '',
     image: '',
@@ -23,50 +23,7 @@ const CreateRecipe = () => {
     difficulty: '',
     aboutDish: ''
   });
-  const [isVideoUploaded, setIsVideoUploaded] = useState(false); // New state for video upload status
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem('accessToken');
-        if (token) {
-          const response = await axios.get("https://veggie-vibes-backend.vercel.app/user/dashboard", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (response.data.error) {
-            navigate("/login");
-          } else {
-
-            
-            setUser(response.data.user);
-            setKey("b78767dac796fc43c744");
-            setCloudName("djbbpvqxu");
-            console.log(response.data.user);
-
-            const response2 = await axios.post("https://veggie-vibes-backend.vercel.app/user/islocked", {
-              id : response.data.user.userId
-            })
-        
-            if (response2.data.locked) {
-              alert("Your account is locked! Please contact admin.")
-              navigate("/");
-            }
-          }
-        } else {
-          navigate("/login");
-        }
-      } catch (error) {
-        console.log("Error:", error);
-      }
-    };
-
-    
-
-    fetchUserData();
-  }, [navigate]);
+  const [isVideoUploaded, setIsVideoUploaded] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -110,7 +67,7 @@ const CreateRecipe = () => {
         ...prevData,
         video: videoUrl,
       }));
-      setIsVideoUploaded(true); // Set video upload status to true
+      setIsVideoUploaded(true);
     } catch (error) {
       console.error("Error uploading video:", error);
     }
@@ -150,9 +107,9 @@ const CreateRecipe = () => {
         },
       });
 
-      toast.success(response.data.message, {
-        autoClose: 1000
-      });
+    //   toast.success(response.data.message, {
+    //     autoClose: 1000
+    //   });
 
       setFormData({
         recipeName: '',
@@ -167,7 +124,9 @@ const CreateRecipe = () => {
         aboutDish: ''
       });
 
-      setIsVideoUploaded(false); // Reset video upload status
+      setIsVideoUploaded(false);
+      navigate("/admin/manage-recipes");
+
     } catch (error) {
       console.error("Error submitting recipe:", error);
     }
@@ -257,6 +216,7 @@ const CreateRecipe = () => {
             value={formData.preparationTime}
             onChange={handleChange}
             className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="e.g., 10 minutes"
             required
           />
         </div>
@@ -268,6 +228,7 @@ const CreateRecipe = () => {
             value={formData.cookTime}
             onChange={handleChange}
             className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            placeholder="e.g., 30 minutes"
             required
           />
         </div>

@@ -1,72 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { FileUploaderRegular } from '@uploadcare/react-uploader';
 import '@uploadcare/react-uploader/core.css';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const CreateRecipe = () => {
+const EditRecipe = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
-  const [key, setKey] = useState('');
-  const [cloudName, setCloudName] = useState("");
-  const [formData, setFormData] = useState({
-    recipeName: '',
-    image: '',
-    video: '',
-    category: '',
-    instructions: '',
-    ingredients: '',
-    preparationTime: '',
-    cookTime: '',
-    difficulty: '',
-    aboutDish: ''
-  });
-  const [isVideoUploaded, setIsVideoUploaded] = useState(false); // New state for video upload status
+  const location = useLocation();
+  const { recipe } = location.state;
+  const [formData, setFormData] = useState(recipe);
+  const [isVideoUploaded, setIsVideoUploaded] = useState(false);
+  const [cloudName, setCloudName] = useState("djbbpvqxu");
 
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const token = localStorage.getItem('accessToken');
-        if (token) {
-          const response = await axios.get("https://veggie-vibes-backend.vercel.app/user/dashboard", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (response.data.error) {
-            navigate("/login");
-          } else {
-
-            
-            setUser(response.data.user);
-            setKey("b78767dac796fc43c744");
-            setCloudName("djbbpvqxu");
-            console.log(response.data.user);
-
-            const response2 = await axios.post("https://veggie-vibes-backend.vercel.app/user/islocked", {
-              id : response.data.user.userId
-            })
-        
-            if (response2.data.locked) {
-              alert("Your account is locked! Please contact admin.")
-              navigate("/");
-            }
-          }
-        } else {
-          navigate("/login");
-        }
-      } catch (error) {
-        console.log("Error:", error);
-      }
-    };
-
-    
-
-    fetchUserData();
-  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -110,7 +57,7 @@ const CreateRecipe = () => {
         ...prevData,
         video: videoUrl,
       }));
-      setIsVideoUploaded(true); // Set video upload status to true
+      setIsVideoUploaded(true);
     } catch (error) {
       console.error("Error uploading video:", error);
     }
@@ -124,50 +71,20 @@ const CreateRecipe = () => {
       return;
     }
 
-    if (!formData.recipeName || !formData.image || !formData.video || !formData.category || !formData.instructions || !formData.ingredients || !formData.preparationTime || !formData.cookTime || !formData.difficulty || !formData.aboutDish) {
-      alert('Please fill in all required fields.');
-      return;
-    }
-
-    const token = localStorage.getItem('accessToken');
     
     try {
-      const response = await axios.post("https://veggie-vibes-backend.vercel.app/user/create-recipe", {
-        recipeName: formData.recipeName,
-        image: formData.image,
-        video: formData.video,
-        category: formData.category,
-        instructions: formData.instructions,
-        ingredients: formData.ingredients,
-        preparationTime: formData.preparationTime,
-        cookTime: formData.cookTime,
-        difficulty: formData.difficulty,
-        aboutDish: formData.aboutDish
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.put(
+        `https://veggie-vibes-backend.vercel.app/admin/update-recipe/${formData._id}`, // Use the appropriate endpoint
+        formData
+      );
 
       toast.success(response.data.message, {
         autoClose: 1000
       });
 
-      setFormData({
-        recipeName: '',
-        image: '',
-        video: '',
-        category: '',
-        instructions: '',
-        ingredients: '',
-        preparationTime: '',
-        cookTime: '',
-        difficulty: '',
-        aboutDish: ''
-      });
-
-      setIsVideoUploaded(false); // Reset video upload status
+      setTimeout(() => {
+        navigate("/admin/manage-recipes");
+      }, 1000);
     } catch (error) {
       console.error("Error submitting recipe:", error);
     }
@@ -175,7 +92,7 @@ const CreateRecipe = () => {
 
   return (
     <div className="max-w-lg mx-auto mb-10 p-6 bg-white rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-center mb-6">Create Recipe</h2>
+      <h2 className="text-2xl font-bold text-center mb-6">Edit Recipe</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="block text-gray-700">Recipe Name:</label>
@@ -192,13 +109,12 @@ const CreateRecipe = () => {
           <label className="block text-gray-700">Upload Image:</label>
           <FileUploaderRegular
             onChange={handleFileChange}
-            pubkey={key}
+            pubkey="b78767dac796fc43c744"
             accept='image/*'
             className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
         </div>
-
         <div>
           <label className="block text-gray-700">Upload Video:</label>
           <input
@@ -210,7 +126,6 @@ const CreateRecipe = () => {
             required
           />
         </div>
-
         <div>
           <label className="block text-gray-700">Category:</label>
           <select
@@ -296,8 +211,11 @@ const CreateRecipe = () => {
             required
           />
         </div>
-        <button type="submit" className="w-full p-2 mt-4 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-          Submit Recipe
+        <button
+          type="submit"
+          className="w-full py-2 px-4 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600"
+        >
+          Update Recipe
         </button>
       </form>
       <ToastContainer />
@@ -305,4 +223,4 @@ const CreateRecipe = () => {
   );
 };
 
-export default CreateRecipe;
+export default EditRecipe;

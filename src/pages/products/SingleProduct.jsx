@@ -19,28 +19,54 @@ const SingleProduct = () => {
     const handleCommentSubmit = async (e) => {
         e.preventDefault();
 
-        try {
-            const token = localStorage.getItem('accessToken');
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+          const response = await axios.get("https://veggie-vibes-backend.vercel.app/user/dashboard", {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
 
-            const response = await axios.post('https://veggie-vibes-backend.vercel.app/api/comment', { comment, itemId: item._id },{
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
+          if (response.data.error) {
+            navigate("/login");
+          } else {
+            const response2 = await axios.post("https://veggie-vibes-backend.vercel.app/user/islocked", {
+              id : response.data.user.userId
+            })
+        
+            if (response2.data.locked) {
+              alert("Your account is locked! Please contact admin.")
+              navigate("/");
             }
-            );
-
-            if(response.data.error){
-                navigate("/login");
+            else{
+                try {
+                    const token = localStorage.getItem('accessToken');
+        
+                    const response3 = await axios.post('https://veggie-vibes-backend.vercel.app/api/comment', { comment, itemId: item._id },{
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                          },
+                    }
+                    );
+        
+                    if(response3.data.error){
+                        navigate("/login");
+                    }
+                    if (response3.data.success) {
+                        setComments([...comments, response3.data.comment]);
+                        setComment('');
+                    } else {
+                        console.error('Error adding comment:');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
             }
-            if (response.data.success) {
-                setComments([...comments, response.data.comment]);
-                setComment('');
-            } else {
-                console.error('Error adding comment:');
-            }
-        } catch (error) {
-            console.error('Error:', error);
         }
+    }
+    else{
+        navigate("/login");
+    }
     };
 
     return (

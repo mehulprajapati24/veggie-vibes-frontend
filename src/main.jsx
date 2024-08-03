@@ -22,6 +22,16 @@ import OtpLogin from './pages/signin/OtpLogin.jsx';
 import ChangePassword from './pages/signin/ChangePassword.jsx';
 import CreateRecipe from './pages/recipe/CreateRecipe.jsx';
 import YourRecipe from './pages/recipe/YourRecipe.jsx';
+import AdminLogin from './pages/signin/AdminLogin.jsx';
+import AdminDashboard from './pages/admin/AdminDashboard.jsx';
+import Sidebar from './pages/admin/Sidebar.jsx';
+import HomePage from './pages/admin/HomePage.jsx';
+import ManageUsers from './pages/admin/ManageUsers.jsx';
+import ManageRecipes from './pages/admin/ManageRecipes.jsx';
+import AddUser from './pages/admin/AddUser.jsx';
+import CreateRecipeAdmin from './pages/admin/CreateRecipeAdmin.jsx';
+import EditRecipe from './pages/admin/EditRecipe.jsx';
+import UpdateRecipe from './pages/recipe/UpdateRecipe.jsx';
 
 
 const router = createBrowserRouter([
@@ -66,6 +76,10 @@ const router = createBrowserRouter([
       {
         path: "/your-recipe",
         element: <YourRecipe/>
+      },
+      {
+        path: "/update-recipe/:id",
+        element: <UpdateRecipe/>
       }
     ]
   },
@@ -92,7 +106,41 @@ const router = createBrowserRouter([
   {
     path: "/change-password",
     element: <ChangePassword/>
-  }
+  },
+  {
+    path: "/admin/login",
+    element: <AdminLogin/>
+  },
+  {
+    path: "/admin",
+    element: <AdminDashboard/>,
+    children: [
+      {
+        path: "/admin",
+        element: <HomePage/>
+      },
+      {
+        path: "/admin/manage-users",
+        element: <ManageUsers/>
+      },
+      {
+        path: "/admin/manage-recipes",
+        element: <ManageRecipes/>
+      },
+      {
+        path: "/admin/adduser",
+        element: <AddUser/>
+      },
+      {
+        path: "/admin/edit-recipe/:id",
+        element: <EditRecipe/>
+      },
+      {
+        path: "/admin/create-recipe",
+        element: <CreateRecipeAdmin/>
+      }
+    ]
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
