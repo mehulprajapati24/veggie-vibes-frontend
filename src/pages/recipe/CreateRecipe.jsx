@@ -150,9 +150,9 @@ const CreateRecipe = () => {
         },
       });
 
-      toast.success(response.data.message, {
-        autoClose: 1000
-      });
+      // toast.success(response.data.message, {
+      //   autoClose: 1000
+      // });
 
       setFormData({
         recipeName: '',
@@ -166,6 +166,8 @@ const CreateRecipe = () => {
         difficulty: '',
         aboutDish: ''
       });
+
+      navigate("/your-recipe");
 
       setIsVideoUploaded(false); // Reset video upload status
     } catch (error) {
