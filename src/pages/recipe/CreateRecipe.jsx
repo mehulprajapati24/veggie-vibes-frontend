@@ -195,7 +195,7 @@ const CreateRecipe = () => {
           <FileUploaderRegular
             onChange={handleFileChange}
             pubkey={key}
-            accept='image/*'
+            // accept='image/*'
             className="w-full p-2 mt-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             required
           />
